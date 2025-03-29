@@ -16,6 +16,7 @@ set C_COUNT=0
 set REL_COUNT=0
 
 for %%f in (src\*.c) do (
+    echo Compiling: %%f
     set /A C_COUNT+=1
     sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "%%f" -o object\ 2>>errors.log
 )
