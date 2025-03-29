@@ -18,6 +18,32 @@ This is an empty project template for **SDCC (Small Device C Compiler)** based 8
 
 ---
 
+## ⚙️ **How to Install SDCC**
+SDCC (Small Device C Compiler) is required for building the project.
+
+### **🔹 Windows**
+1. Download SDCC from [SDCC Official Website](https://sourceforge.net/projects/sdcc/)
+2. Install it and ensure `sdcc` is added to the system's `PATH`
+3. Verify the installation by running:
+   ```cmd
+   sdcc --version
+   ```
+
+### **🔹 Linux (Debian/Ubuntu)**
+```bash
+sudo apt update
+sudo apt install sdcc
+sdcc --version
+```
+
+### **🔹 MacOS (Using Homebrew)**
+```bash
+brew install sdcc
+sdcc --version
+```
+
+---
+
 ## ⚙️ **How to Build**
 
 ### **🔹 Windows**
