@@ -1,4 +1,5 @@
 #include "LCD4.H"
+#include "../Delay/Delay.h"// Delay function declarations
 
 u8 _displaymode = 0x00; // Default: Left-to-right, no autoscroll
 
