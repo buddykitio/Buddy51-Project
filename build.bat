@@ -2,7 +2,8 @@
 setlocal enabledelayedexpansion
 
 rem Define libraries to use
-set USE=
+set USE=Delay
+rem LCD4
 
 rem Create necessary folders if they don't exist
 if not exist object mkdir object
@@ -12,7 +13,7 @@ rem Remove old files
 del /Q object\*.rel 2>nul
 del /Q object\*.ihx 2>nul
 del /Q release\*.hex 2>nul
-del /Q errors.log 2>nul
+del /Q object\errors.log 2>nul
 
 rem Step 1: Compile each .c file in src folder into .rel files
 set C_COUNT=0
@@ -26,11 +27,11 @@ for %%f in (src\*.c) do (
 
 rem Step 2: Compile libraries specified in USE
 for %%L in (%USE%) do (
-    if exist %%L ( 
-        if exist %%L\%%L.c (
-            echo Compiling Library: %%L\%%L.c
+    if exist .\library\%%L ( 
+        if exist .\library\%%L\%%L.c (
+            echo Compiling Library: .\library\%%L\%%L.c
             set /A C_COUNT+=1
-            sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "%%L\%%L.c" -o object\ 2>>errors.log
+           sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 ".\library\%%L\%%L.c" -o object\ 2>>object\errors.log
         ) else (
             echo WARNING: %%L\%%L.c not found, skipping...
         )
@@ -45,7 +46,12 @@ for %%f in (object\*.rel) do (
 )
 
 if %C_COUNT% NEQ %REL_COUNT% (
-    echo ERROR: Some .rel files are missing! Compilation failed.
+    echo:
+    echo ERROR
+    echo ================================
+    type object\errors.log
+    echo:
+    echo:
     exit /b 1
 )
 
