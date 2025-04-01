@@ -63,7 +63,7 @@ void main() {
 
     while (1); // Infinite loop
 }
-
+```
 ---
 
 ## 📢 **Notes**
