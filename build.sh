@@ -5,7 +5,7 @@ set -e  # Exit on error
 set -u  # Treat unset variables as errors
 
 # Define libraries to use
-USE=(Delay LCD4)
+USE=(Delay LCD4 I2C)
 
 # Create necessary folders if they don't exist
 mkdir -p object release

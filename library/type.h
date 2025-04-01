@@ -8,6 +8,8 @@
     nop \
 __endasm
 
+#define _nop_ NOP
+
 #define push(x)		_push_(x)
 #define pop(x)		_pop_(x)
 #endif

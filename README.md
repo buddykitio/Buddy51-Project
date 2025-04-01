@@ -1,4 +1,4 @@
-# SDCC Compiler-Supported Complete 8051 Development Library
+# SDCC 8051 Development Library
 
 This is a complete 8051 project template for **SDCC (Small Device C Compiler)**-based 8051 development. Simply add your C source files to the `src/` directory and run the build script!
 
@@ -10,6 +10,7 @@ This is a complete 8051 project template for **SDCC (Small Device C Compiler)**-
 ├── library/    # Fully functional libraries
 ├──── Delay     # Delay function routines
 ├──── LCD4      # 4-bit LCD library and functions
+├──── I2C       # I2C communication library
 ├── object/     # Compiled object (.rel) files (auto-created)
 ├── release/    # Final HEX output (auto-created)
 ├── build.bat   # Windows build script

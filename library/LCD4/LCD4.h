@@ -6,8 +6,8 @@
 #include "../Delay/Delay.h"// Delay function declarations
 
 /* Pin Definitions - Modify these based on your hardware connections */
-#define LCD_RS P2_0       // Register Select (Command/Data)
-#define LCD_EN P2_1        // Enable pin (clock signal)
+#define LCD_RS P2_2       // Register Select (Command/Data)
+#define LCD_EN P2_3        // Enable pin (clock signal)
 #define LCD_D4 P2_4        // Data bit 4
 #define LCD_D5 P2_5        // Data bit 5
 #define LCD_D6 P2_6        // Data bit 6
