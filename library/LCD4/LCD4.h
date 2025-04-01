@@ -54,7 +54,7 @@
 void LCD_Command(u8 cmd);         // Send command to LCD
 void LCD_Data(u8 dat);            // Send data to LCD
 void LCD_Init(void);              // Initialize LCD
-void LCD_Puts(const char* ptr);   // Print string to LCD
+void LCD_Puts(pu8 ptr);   // Print string to LCD
 void LCD_Goto(u8 r, u8 c);        // Move cursor to (row, column)
 void LCD_Clear(u8 row, u8 col, u8 size); // Clear portion of display
 void LCD_ScrollLeft(void);        // Scroll display left

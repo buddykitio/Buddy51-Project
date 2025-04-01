@@ -1,10 +1,7 @@
-
-
-# Buddy51mini LCD Library
+# LCD 4 bit Library
 
 ## Pin Connections
 
-```markdown
 ### LCD Pin Configuration (4-bit mode)
 
 | LCD Pin | 8051 Connection | Description                    |
@@ -20,11 +17,11 @@
 | D6      | P2.6            | Data bit 6                     |
 | D7      | P2.7            | Data bit 7                     |
 | A/K     | +5V via resistor| Backlight anode (if available) |
-```
+
+---
 
 ## Constants in LCD.H
 
-```markdown
 ### Command Constants
 
 | Constant            | Value | Description                          |
@@ -46,11 +43,11 @@
 | `LCD_DISPLAYON`     | 0x04  | Turns display on                     |
 | `LCD_4BITMODE`      | 0x00  | 4-bit interface mode                 |
 | `LCD_2LINE`         | 0x08  | 2-line display mode                  |
-```
+
+---
 
 ## Functions in LCD.H
 
-```markdown
 ### Core Functions
 
 | Function                 | Parameters          | Description                          |
@@ -87,7 +84,8 @@
 |--------------------------|--------------------------------------|
 | `LCD_Autoscroll(void)`   | Enables auto-shifting of text        |
 | `LCD_NoAutoscroll(void)` | Disables auto-shifting               |
-```
+
+---
 
 ## Usage Example
 
@@ -100,7 +98,7 @@
 
 // Function to delay for approximately 1 second
 void Delay1s() {
-    unsigned int i;
+    u16 i;
     for (i = 0; i < 20000; i++) { // Adjust loop count based on your clock speed
         DelayXus(5);             // Small delay inside loop for better accuracy
     }
@@ -128,5 +126,4 @@ void main() {
         }
     }
 }
-```
 ```

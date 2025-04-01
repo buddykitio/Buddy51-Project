@@ -60,7 +60,7 @@ void LCD_Init(void) {
 }
 
 // Print a string
-void LCD_Puts(const char* ptr) {
+void LCD_Puts(pu8 ptr) {
     while (*ptr) {
         LCD_Data(*ptr++);
     }
