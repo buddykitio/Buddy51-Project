@@ -1,6 +1,4 @@
 #include "I2C.h"
-#include "../system.h"
-#include <8051.h>
 
 // Initialize I2C communication (sets SDA and SCL to idle high)
 void I2C_Init(void){

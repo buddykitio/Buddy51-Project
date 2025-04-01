@@ -1,6 +1,8 @@
 #ifndef _I2C_H_
 #define _I2C_H_
 
+#include "../system.h"
+#include <8051.h>
 #include "../type.h"
 
 void I2C_Init(void);
