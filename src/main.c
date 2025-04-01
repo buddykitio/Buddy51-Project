@@ -1,18 +1,35 @@
-#include <8051.h>  // Include standard 8051 register definitions
+#include <8051.h> 
+#include "../library/LCD4/LCD4.h"
+#include "../library/Delay/Delay.h"
 
-// Delay function
-void delay() {
+
+// Function to delay for approximately 1 second
+void Delay1s() {
     unsigned int i;
-    for (i = 0; i < 30000; i++);  // Simple delay loop
+    for (i = 0; i < 20000; i++) { // Adjust loop count based on your clock speed
+        DelayXus(5);             // Small delay inside loop for better accuracy
+    }
 }
 
 void main() {
-    P1 = 0x00;  // Set Port 1 as output (if required)
-
-    while (1) {
-        P1_0 = 1;  // Turn LED ON (assuming LED is connected to P1.0)
-        delay();
-        P1_0 = 0;  // Turn LED OFF
-        delay();
+    LCD_Init();
+    LCD_LeftToRight();   // Default: Left-to-right text
+    LCD_NoAutoscroll();  // Disable autoscroll (manual scrolling only)
+    
+    // Display a long string to enable scrolling
+    LCD_Puts("HI BUDDIES!");
+    
+    while (1) { // Infinite loop
+        // Scroll right 4 times (1-second delay between each)
+        for (int i = 0; i < 4; i++) {
+            LCD_ScrollRight();
+            Delay1s();
+        }
+        
+        // Scroll left 4 times (1-second delay between each)
+        for (int i = 0; i < 4; i++) {
+            LCD_ScrollLeft();
+            Delay1s();
+        }
     }
 }

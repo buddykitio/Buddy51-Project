@@ -2,8 +2,9 @@
 setlocal enabledelayedexpansion
 
 rem Define libraries to use
-set USE=Delay
-rem LCD4
+set USE=Delay LCD4
+
+rem Delay LCD4
 
 rem Create necessary folders if they don't exist
 if not exist object mkdir object
