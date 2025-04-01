@@ -1,8 +1,4 @@
-#include "../system.h"
-#include <8051.h>
 #include "EEPROM.h"
-#include "../I2C/I2C.h"
-#include "../Delay/Delay.h"
 
 // Navigate to a specified EEPROM address. 
 // If mode is 0, it writes the address for writing.

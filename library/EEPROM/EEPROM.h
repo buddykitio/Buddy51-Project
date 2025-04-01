@@ -1,10 +1,11 @@
 #ifndef _EEPROM_H_
 #define _EEPROM_H_
 
-#include "../type.h"
-#include "../I2C/I2C.h"
 #include "../system.h"
 #include <8051.h>
+#include "../type.h"
+#include "../I2C/I2C.h"
+#include "../Delay/Delay.h"
 
 // EEPROM I2C address for the 24LC16 EEPROM (fixed address)
 #define IC24LC16 0xA0
