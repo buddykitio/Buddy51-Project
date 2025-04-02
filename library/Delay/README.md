@@ -1,11 +1,11 @@
 # Delay Using Timer
 
-## Overview
+## 📌 Overview
 This library provides delay functions for the 8051 microcontroller using timers. It includes functions to generate microsecond using nop and millisecond delays uses Timer 0 or Timer 1, by default TIMER1
 
 ---
 
-## Functions
+## 📌 Functions
 
 | Function | Description |
 |----------|-------------|
@@ -14,7 +14,7 @@ This library provides delay functions for the 8051 microcontroller using timers.
 
 ---
 
-## Usage Example
+## 📌 Usage Example
 
 ```c
 #include <8051.h>
@@ -35,7 +35,7 @@ void main() {
 
 ---
 
-## Constants and Macros
+## 📌 Constants and Macros
 
 ### Timer Reload Calculation
 These macros compute the values required to load into the timer registers for accurate delay generation.
@@ -52,7 +52,7 @@ These macros compute the values required to load into the timer registers for ac
 
 ---
 
-## Notes
+## 📢 Notes
 - Ensure `_1MS_COUNT` is defined correctly according to the system clock frequency.
 - Timer reload values must be adjusted if using different clock speeds.
 - Using Timer 0 and Timer 1 for delays simultaneously may interfere with other timing operations.
