@@ -10,6 +10,9 @@ __endasm
 
 #define _nop_ NOP
 
+#define code __code
+#define CODE code
+
 #define push(x)		_push_(x)
 #define pop(x)		_pop_(x)
 #endif
