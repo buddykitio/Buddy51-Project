@@ -4,6 +4,8 @@
 
 #ifndef nop
 
+#define nop NOP
+
 #define NOP() __asm \
     nop \
 __endasm
