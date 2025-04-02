@@ -34,7 +34,7 @@ This library depends on the following modules:
 This example writes a byte to EEPROM and reads it back. If the written and read values match, it blinks an LED connected to **P1_1**.
 
 ```c
-#include "EEPROM.h"
+#include "../library/EEPROM/EEPROM.h"
 
 #define EEPROM_TEST_ADDRESS  0x10  // Test EEPROM address
 #define TEST_VALUE           0x55  // Test data to write
