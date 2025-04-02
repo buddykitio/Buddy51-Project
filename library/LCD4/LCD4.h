@@ -5,6 +5,13 @@
 #include "../type.h"       // Custom type definitions (likely contains u8, u16 etc.)
 #include "../Delay/Delay.h"// Delay function declarations
 
+#define I2C_LCD 0
+
+#if I2C_LCD
+
+#define I2C_ADDR 0x27 
+#include "../I2C/I2C.h"// Delay function declarations
+#else
 /* Pin Definitions - Modify these based on your hardware connections */
 #define LCD_RS P2_2       // Register Select (Command/Data)
 #define LCD_EN P2_3        // Enable pin (clock signal)
@@ -12,6 +19,7 @@
 #define LCD_D5 P2_5        // Data bit 5
 #define LCD_D6 P2_6        // Data bit 6
 #define LCD_D7 P2_7        // Data bit 7
+#endif
 
 /* LCD Command Set */
 #define LCD_CLEAR         0x01 // Clear display and return home
