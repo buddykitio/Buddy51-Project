@@ -7,6 +7,7 @@ set -u  # Treat unset variables as errors
 # Define libraries to use
 USE=(Delay LCD4 I2C EEPROM DS1307)
 
+# availble libraries: Delay LCD4 I2C EEPROM DS1307 SPI
 # Create necessary folders if they don't exist
 mkdir -p object release
 
