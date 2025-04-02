@@ -22,6 +22,13 @@ This library provides functions to read from and write to an **I2C-based EEPROM 
 
 ---
 
+## 📌 **Dependencies**
+This library depends on the following modules:
+- **[I2C Library](../I2C/README.md)** (for communication with the 24CXX)
+- **[Delay Library](../Delay/README.md)** (for accurate timing)
+
+---
+
 ## 📌 **Example: Test EEPROM Read/Write**
 
 This example writes a byte to EEPROM and reads it back. If the written and read values match, it blinks an LED connected to **P1_1**.

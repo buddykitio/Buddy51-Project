@@ -1,6 +1,6 @@
 # LCD 4 bit Library
 
-## Pin Connections
+## 📌 Pin Connections
 
 ### LCD Pin Configuration (4-bit mode)
 
@@ -20,7 +20,7 @@
 
 ---
 
-## Constants in LCD.H
+## 📌 Constants in LCD.H
 
 ### Command Constants
 
@@ -46,7 +46,7 @@
 
 ---
 
-## Functions in LCD.H
+## 📌 Functions in LCD.H
 
 ### Core Functions
 
@@ -84,6 +84,12 @@
 |--------------------------|--------------------------------------|
 | `LCD_Autoscroll(void)`   | Enables auto-shifting of text        |
 | `LCD_NoAutoscroll(void)` | Disables auto-shifting               |
+
+---
+
+## 📌 **Dependencies**
+This library depends on the following modules:
+- **[Delay Library](../Delay/README.md)** (for accurate timing)
 
 ---
 

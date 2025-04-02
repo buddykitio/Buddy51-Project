@@ -31,7 +31,6 @@ This library provides functions to interface with the **DS1307 Real-Time Clock (
 This library depends on the following modules:
 - **[I2C Library](../I2C/README.md)** (for communication with the DS1307)
 - **[Delay Library](../Delay/README.md)** (for accurate timing)
-- **[Type Library](../Type/README.md)** (for standard data types)
 
 Ensure these libraries are included in your project.
 
