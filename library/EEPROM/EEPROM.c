@@ -14,7 +14,7 @@ u8 EEPROM_Goto(const u8 address, u8 mode){
 	// If mode is 1 (read mode), issue a start condition and change the read address
 	if(mode){
 		I2C_Start();
-		I2C_Write(IC24LC16 + 1); // Send read command by adding 1 to IC24LC16 address
+		I2C_Write((u8)(IC24LC16 + 1)); // Send read command by adding 1 to IC24LC16 address
 	}
 	return 0;  // Return success
 }
@@ -42,7 +42,7 @@ u8 EEPROM_Read(u8 address, u8* data) {
     }
     I2C_Write(address);               // Send memory address
     I2C_Start();                      // Restart communication for reading
-    I2C_Write(IC24LC16 + 1);          // Send EEPROM device address (read mode)
+    I2C_Write((u8)(IC24LC16 + 1));          // Send EEPROM device address (read mode)
     *data = I2C_Read(1);              // Read data with NACK (last byte)
     I2C_Stop();                       // Stop communication
     return 0;

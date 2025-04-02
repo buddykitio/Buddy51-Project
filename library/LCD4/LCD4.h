@@ -64,4 +64,6 @@ void LCD_RightToLeft(void);       // Set right-to-left text direction
 void LCD_Autoscroll(void);        // Enable auto-scrolling
 void LCD_NoAutoscroll(void);      // Disable auto-scrolling
 
+#define LCD_ClearRow(a) LCD_Clear(a, 0, LCD_COLS)
+
 #endif 

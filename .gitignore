@@ -1,3 +1,5 @@
 **/object/
 **/release/
 *.log
+**/simulation/Project Backups
+**/*.pdsprj.*
