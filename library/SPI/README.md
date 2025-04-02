@@ -32,7 +32,6 @@ The following example demonstrates SPI communication using the 74165 & 74595 shi
 ```c
 #include <8051.h> 
 #include "../library/Delay/Delay.h"
-#include "../library/DS1307/DS1307.h"
 #include "../library/SPI/SPI.h"
 
 // Function to delay for approximately 1 second
@@ -43,8 +42,8 @@ void Delay1s() {
     }
 }
 
-#define LATCH  P3_4
-#define LOAD   P3_3
+#define LATCH  P3_4 //595 latch pin
+#define LOAD   P3_3 //165 load/shift pin
 
 // Example Usage
 void main() {
