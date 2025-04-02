@@ -1,7 +1,7 @@
 #include <8051.h> 
 #include "../library/LCD4/LCD4.h"
 #include "../library/Delay/Delay.h"
-
+#include "../library/DS1307/DS1307.h"
 
 // Function to delay for approximately 1 second
 void Delay1s() {
@@ -12,6 +12,9 @@ void Delay1s() {
 }
 
 void main() {
+u8 buff[17];
+
+    I2C_Init();
     LCD_Init();
     LCD_LeftToRight();   // Default: Left-to-right text
     LCD_NoAutoscroll();  // Disable autoscroll (manual scrolling only)
@@ -21,15 +24,11 @@ void main() {
     
     while (1) { // Infinite loop
         // Scroll right 4 times (1-second delay between each)
-        for (int i = 0; i < 4; i++) {
-            LCD_ScrollRight();
-            Delay1s();
-        }
-        
-        // Scroll left 4 times (1-second delay between each)
-        for (int i = 0; i < 4; i++) {
-            LCD_ScrollLeft();
-            Delay1s();
-        }
+        RTC_Read();
+        RTC_Time2Str(buff);
+        LCD_ClearRow(0);
+        LCD_Puts(buff);
+
+        Delay1s();
     }
 }
