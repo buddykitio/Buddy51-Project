@@ -90,6 +90,8 @@ void LCD_Init(void) {
     LCD_Command(0x0C);   // Display on, cursor off 
     LCD_Command(0x01);   // Clear display
     LCD_Command(LCD_ENTRYMODESET | _displaymode); // Default mode
+    LCD_LeftToRight();
+    LCD_NoAutoscroll();
 }
 
 // Print a string
