@@ -44,6 +44,7 @@ __endasm
 typedef unsigned char	BYTE;
 typedef unsigned short	WORD;
 typedef unsigned long	LWORD;
+typedef code BYTE cbyte;
 #endif
 
 #ifndef uchar
