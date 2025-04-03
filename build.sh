@@ -7,41 +7,54 @@ set -u  # Treat unset variables as errors
 # Define libraries to use
 USE=(Delay LCD4 I2C EEPROM DS1307)
 
-# availble libraries: Delay LCD4 I2C EEPROM DS1307 SPI
+# Available libraries: Delay LCD4 I2C EEPROM DS1307 SPI
+
 # Create necessary folders if they don't exist
 mkdir -p object release
 
-# Remove old files
-rm -f object/*.rel object/*.ihx release/*.hex object/errors.log
+# Remove old files (except .rel files for incremental build)
+rm -f object/*.ihx release/*.hex object/errors.log
 
-# Step 1: Compile each .c file in src folder into .rel files
+# Step 1: Compile each .c file in src folder into .rel files if updated
 C_COUNT=0
 REL_COUNT=0
 
 for file in src/*.c; do
     if [[ -f "$file" ]]; then
-        echo "Compiling: $file"
-        ((C_COUNT++))
-        sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "$file" -o object/ 2>>object/errors.log || true
+        rel_file="object/$(basename "${file%.*}").rel"
+        ((C_COUNT++))  # Always increment count
+
+        # Check if .rel file exists and if .c file is newer
+        if [[ ! -f "$rel_file" || "$file" -nt "$rel_file" ]]; then
+            echo "Compiling updated file: $file"
+            sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "$file" -o object/ 2>>object/errors.log || true
+        else
+            echo "Skipping unchanged file: $file"
+        fi
     fi
 done
 
-# Step 2: Compile libraries specified in USE
+# Step 2: Compile libraries specified in USE if updated
 for LIB in "${USE[@]}"; do
-    if [[ -d "library/$LIB" ]]; then
-        if [[ -f "library/$LIB/$LIB.c" ]]; then
-            echo "Compiling Library: library/$LIB/$LIB.c"
-            ((C_COUNT++))
-            sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "library/$LIB/$LIB.c" -o object/ 2>>object/errors.log || true
+    LIB_SRC="library/$LIB/$LIB.c"
+    LIB_REL="object/$LIB.rel"
+    
+    if [[ -f "$LIB_SRC" ]]; then
+        ((C_COUNT++))  # Always increment count
+
+        # Check if .rel file exists and if .c file is newer
+        if [[ ! -f "$LIB_REL" || "$LIB_SRC" -nt "$LIB_REL" ]]; then
+            echo "Compiling updated library: $LIB_SRC"
+            sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "$LIB_SRC" -o object/ 2>>object/errors.log || true
         else
-            echo "WARNING: library/$LIB/$LIB.c not found, skipping..."
+            echo "Skipping unchanged library: $LIB_SRC"
         fi
     else
-        echo "WARNING: Library folder $LIB not found, skipping..."
+        echo "WARNING: Library file $LIB_SRC not found, skipping..."
     fi
 done
 
-# Step 3: Check if all .rel files were created
+# Step 3: Count all .rel files
 for file in object/*.rel; do
     if [[ -f "$file" ]]; then
         ((REL_COUNT++))

@@ -4,54 +4,76 @@ setlocal enabledelayedexpansion
 rem Define libraries to use
 set USE=Delay LCD4 I2C EEPROM DS1307
 
-rem availbel libraries: Delay LCD4 I2C EEPROM DS1307 SPI
+rem Available libraries: Delay LCD4 I2C EEPROM DS1307 SPI
 
 rem Create necessary folders if they don't exist
 if not exist object mkdir object
 if not exist release mkdir release
 
 rem Remove old files
-del /Q object\*.rel 2>nul
 del /Q object\*.ihx 2>nul
 del /Q release\*.hex 2>nul
 del /Q object\errors.log 2>nul
 
-rem Step 1: Compile each .c file in src folder into .rel files
+rem Step 1: Compile each .c file in src folder into .rel files if updated
 set C_COUNT=0
 set REL_COUNT=0
 
 for %%f in (src\*.c) do (
-    echo Compiling: %%f
-    set /A C_COUNT+=1
-    sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "%%f" -o object\ 2>>object\errors.log
-)
+    set "rel_file=object\%%~nf.rel"
+    set /A C_COUNT+=1  rem Always increment C_COUNT
 
-rem Step 2: Compile libraries specified in USE
-for %%L in (%USE%) do (
-    if exist .\library\%%L ( 
-        if exist .\library\%%L\%%L.c (
-            echo Compiling Library: .\library\%%L\%%L.c
-            set /A C_COUNT+=1
-           sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 ".\library\%%L\%%L.c" -o object\ 2>>object\errors.log
-        ) else (
-            echo WARNING: %%L\%%L.c not found, skipping...
-        )
+    if not exist "!rel_file!" (
+        echo Compiling new file: %%f
+        sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "%%f" -o object\ 2>>object\errors.log
     ) else (
-        echo WARNING: Library folder %%L not found, skipping...
+        for /F "delims=" %%T in ('forfiles /P "src" /M "%%~nxf" /C "cmd /c echo @ftime"') do set "SRC_TIME=%%T"
+        for /F "delims=" %%T in ('forfiles /P "object" /M "%%~nf.rel" /C "cmd /c echo @ftime"') do set "REL_TIME=%%T"
+
+        if !SRC_TIME! GTR !REL_TIME! (
+            echo Recompiling updated file: %%f
+            sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "%%f" -o object\ 2>>object\errors.log
+        ) else (
+            echo Skipping unchanged file: %%f
+        )
     )
 )
 
-rem Step 3: Check if all .rel files were created
+rem Step 2: Compile libraries specified in USE if updated
+for %%L in (%USE%) do (
+    if exist .\library\%%L\%%L.c (
+        set "rel_file=object\%%L.rel"
+        set /A C_COUNT+=1  rem Always increment C_COUNT
+
+        if not exist "!rel_file!" (
+            echo Compiling new library: .\library\%%L\%%L.c
+            sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 ".\library\%%L\%%L.c" -o object\ 2>>object\errors.log
+        ) else (
+            for /F "delims=" %%T in ('forfiles /P "library\%%L" /M "%%L.c" /C "cmd /c echo @ftime"') do set "SRC_TIME=%%T"
+            for /F "delims=" %%T in ('forfiles /P "object" /M "%%L.rel" /C "cmd /c echo @ftime"') do set "REL_TIME=%%T"
+
+            if !SRC_TIME! GTR !REL_TIME! (
+                echo Recompiling updated library: .\library\%%L\%%L.c
+                sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 ".\library\%%L\%%L.c" -o object\ 2>>object\errors.log
+            ) else (
+                echo Skipping unchanged library: .\library\%%L\%%L.c
+            )
+        )
+    ) else (
+        echo WARNING: Library file .\library\%%L\%%L.c not found, skipping...
+    )
+)
+
+rem Step 3: Count all .rel files
 for %%f in (object\*.rel) do (
     set /A REL_COUNT+=1
 )
 
 if %C_COUNT% NEQ %REL_COUNT% (
     echo:
-    echo ERROR
+    echo ERROR: Compilation failed!
     echo ================================
     type object\errors.log
-    echo:
     echo:
     exit /b 1
 )
