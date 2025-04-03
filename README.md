@@ -6,18 +6,23 @@ This is a complete 8051 project template for **SDCC (Small Device C Compiler)**-
 
 ## 📂 **Project Structure**
 ```
-├── src/        # Add your .c and .h files here
-├── library/    # Fully functional libraries
-├──── Delay     # Delay function routines
-├──── LCD4      # 4-bit LCD library and functions
-├──── I2C       # I2C communication library
-├── object/     # Compiled object (.rel) files (auto-created)
-├── release/    # Final HEX output (auto-created)
-├── build.bat   # Windows build script
-├── build.sh    # Linux/MacOS build script
-├── clean.bat   # Windows clean script
-├── clean.sh    # Linux/MacOS clean script
-└── README.md   # Project documentation
+├── src/          # Add your .c and .h files here
+├── library/      # Fully functional libraries
+├──── Delay       # Delay function routines
+├──── DS1307      # I2C based DS1307 RTC Library
+├──── EEPROM      # I2C based 24C02/04/08/16 EEPROM memory library
+├──── I2C         # I2C communication library
+├──── KEYPAD4X4   # 4x4 matrix keypad library
+├──── LCD4        # 4-bit LCD parallel & I2C supported library
+├──── LED7SEGMENT # 6 digit, 7 segment with dot and negative support library
+├──── SPI         # Software driven SPI for periperals
+├── object/       # Compiled object (.rel) files (auto-created)
+├── release/      # Final HEX output (auto-created)
+├── build.bat     # Windows build script
+├── build.sh      # Linux/MacOS build script
+├── clean.bat     # Windows clean script
+├── clean.sh      # Linux/MacOS clean script
+└── README.md     # Project documentation
 ```
 
 ---
