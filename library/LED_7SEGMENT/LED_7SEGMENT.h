@@ -6,7 +6,9 @@
 #include "../Delay/Delay.h"// Delay function declarations
 #include "../system.h"
 
-#define SEG_MODE 0
+//DO MODIFY HERE
+
+#define SEG_MODE CC
 
 #define SEG_PORT P0
 
@@ -19,6 +21,10 @@
 
 #define DISPLAY_TIMER 0
 
+//STOP HERE
+
+#define CC 0
+#define CA 1
 
 #define SEG_TIMER_TH 0xF1
 #define SEG_TIMER_TL 0x4D
