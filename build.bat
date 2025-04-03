@@ -21,7 +21,7 @@ set REL_COUNT=0
 
 for %%f in (src\*.c) do (
     set "rel_file=object\%%~nf.rel"
-    set /A C_COUNT+=1  rem Always increment C_COUNT
+    set /A C_COUNT+=1
 
     if not exist "!rel_file!" (
         echo Compiling new file: %%f
@@ -43,7 +43,7 @@ rem Step 2: Compile libraries specified in USE if updated
 for %%L in (%USE%) do (
     if exist .\library\%%L\%%L.c (
         set "rel_file=object\%%L.rel"
-        set /A C_COUNT+=1  rem Always increment C_COUNT
+        set /A C_COUNT+=1
 
         if not exist "!rel_file!" (
             echo Compiling new library: .\library\%%L\%%L.c
