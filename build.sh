@@ -20,18 +20,9 @@ C_COUNT=0
 REL_COUNT=0
 
 for file in src/*.c; do
-    if [[ -f "$file" ]]; then
-        rel_file="object/$(basename "${file%.*}").rel"
-        ((C_COUNT++))  # Always increment count
-
-        # Check if .rel file exists and if .c file is newer
-        if [[ ! -f "$rel_file" || "$file" -nt "$rel_file" ]]; then
-            echo "Compiling updated file: $file"
-            sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "$file" -o object/ 2>>object/errors.log || true
-        else
-            echo "Skipping unchanged file: $file"
-        fi
-    fi
+    ((C_COUNT++))  # Always increment count
+    echo "Compiling: $file"
+    sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "$file" -o object/ 2>>object/errors.log || true
 done
 
 # Step 2: Compile libraries specified in USE if updated
@@ -44,7 +35,7 @@ for LIB in "${USE[@]}"; do
 
         # Check if .rel file exists and if .c file is newer
         if [[ ! -f "$LIB_REL" || "$LIB_SRC" -nt "$LIB_REL" ]]; then
-            echo "Compiling updated library: $LIB_SRC"
+            echo "Compiling library: $LIB_SRC"
             sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "$LIB_SRC" -o object/ 2>>object/errors.log || true
         else
             echo "Skipping unchanged library: $LIB_SRC"

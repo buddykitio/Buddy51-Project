@@ -23,20 +23,8 @@ for %%f in (src\*.c) do (
     set "rel_file=object\%%~nf.rel"
     set /A C_COUNT+=1
 
-    if not exist "!rel_file!" (
-        echo Compiling new file: %%f
-        sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "%%f" -o object\ 2>>object\errors.log
-    ) else (
-        for /F "delims=" %%T in ('forfiles /P "src" /M "%%~nxf" /C "cmd /c echo @ftime"') do set "SRC_TIME=%%T"
-        for /F "delims=" %%T in ('forfiles /P "object" /M "%%~nf.rel" /C "cmd /c echo @ftime"') do set "REL_TIME=%%T"
-
-        if !SRC_TIME! GTR !REL_TIME! (
-            echo Recompiling updated file: %%f
-            sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "%%f" -o object\ 2>>object\errors.log
-        ) else (
-            echo Skipping unchanged file: %%f
-        )
-    )
+    echo Compiling: %%f
+    sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "%%f" -o object\ 2>>object\errors.log
 )
 
 rem Step 2: Compile libraries specified in USE if updated
@@ -46,7 +34,7 @@ for %%L in (%USE%) do (
         set /A C_COUNT+=1
 
         if not exist "!rel_file!" (
-            echo Compiling new library: .\library\%%L\%%L.c
+            echo Compiling library: .\library\%%L\%%L.c
             sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 ".\library\%%L\%%L.c" -o object\ 2>>object\errors.log
         ) else (
             for /F "delims=" %%T in ('forfiles /P "library\%%L" /M "%%L.c" /C "cmd /c echo @ftime"') do set "SRC_TIME=%%T"
