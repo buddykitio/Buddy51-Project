@@ -6,7 +6,7 @@ u8 _displaymode = 0x00; // Default: Left-to-right, no autoscroll
 u8 _lcd_data = 0x08;
 #endif
 
-void LCD_Nibble(u8 data) {
+void LCD_Nibble(u8 value) {
 #if I2C_LCD
     _lcd_data &= 0x0F;
     _lcd_data |= (data << 4); // Shift to match LCD nibble format
@@ -19,10 +19,10 @@ void LCD_Nibble(u8 data) {
     I2C_Stop();
     DelayXus(100);
 #else
-    LCD_D7 = (data & 0x08) ? 1 : 0;
-    LCD_D6 = (data & 0x04) ? 1 : 0;
-    LCD_D5 = (data & 0x02) ? 1 : 0;
-    LCD_D4 = (data & 0x01) ? 1 : 0;
+    LCD_D7 = (value & 0x08) ? 1 : 0;
+    LCD_D6 = (value & 0x04) ? 1 : 0;
+    LCD_D5 = (value & 0x02) ? 1 : 0;
+    LCD_D4 = (value & 0x01) ? 1 : 0;
 
     LCD_EN = 0;
     DelayXus(1);
