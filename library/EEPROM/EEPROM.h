@@ -11,8 +11,8 @@
 #define IC24LC16 0xA0
 
 u8 EEPROM_Goto(const u8 address, u8 mode);
-u8 EEPROM_Write(u8 address, u8 data);
-u8 EEPROM_Read(u8 address, u8* data);
+u8 EEPROM_Write(u8 address, u8 value);
+u8 EEPROM_Read(u8 address, u8* value);
 u8 EEPROM_Writes(u8 address, void* vData, u8 length);
 u8 EEPROM_Reads(u8 address, void* vData, u8 length);
 

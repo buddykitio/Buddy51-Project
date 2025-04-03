@@ -20,21 +20,21 @@ u8 EEPROM_Goto(const u8 address, u8 mode){
 }
 
 // Write a single byte to EEPROM
-u8 EEPROM_Write(u8 address, u8 data) {
+u8 EEPROM_Write(u8 address, u8 value) {
     I2C_Start();                     // Start I2C communication
     if (I2C_Write(IC24LC16)) {        // Send EEPROM device address (write mode)
         I2C_Stop();
         return 1;
     }
     I2C_Write(address);               // Send memory address
-    I2C_Write(data);                  // Send data byte
+    I2C_Write(value);                  // Send data byte
     I2C_Stop();                        // Stop communication
     DelayXms(10);                     // Wait for write cycle to complete
     return 0;
 }
 
 // Read a single byte from EEPROM
-u8 EEPROM_Read(u8 address, u8* data) {
+u8 EEPROM_Read(u8 address, u8* value) {
     I2C_Start();                     // Start I2C communication
     if (I2C_Write(IC24LC16)) {        // Send EEPROM device address (write mode)
         I2C_Stop();
@@ -43,7 +43,7 @@ u8 EEPROM_Read(u8 address, u8* data) {
     I2C_Write(address);               // Send memory address
     I2C_Start();                      // Restart communication for reading
     I2C_Write((u8)(IC24LC16 + 1));          // Send EEPROM device address (read mode)
-    *data = I2C_Read(1);              // Read data with NACK (last byte)
+    *value = I2C_Read(1);              // Read data with NACK (last byte)
     I2C_Stop();                       // Stop communication
     return 0;
 }
