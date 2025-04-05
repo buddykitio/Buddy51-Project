@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 rem Define libraries to use
-set USE=Delay LCD4 I2C EEPROM DS1307
+set USE=
 
 rem Available libraries: Delay LCD4 I2C EEPROM DS1307 SPI LED_7SEGMENT KEYPAD4X4
 

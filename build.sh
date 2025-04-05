@@ -5,7 +5,7 @@ set -e  # Exit on error
 set -u  # Treat unset variables as errors
 
 # Define libraries to use
-USE=(Delay LCD4 I2C EEPROM DS1307)
+USE=()
 
 # Available libraries: Delay LCD4 I2C EEPROM DS1307 SPI
 
