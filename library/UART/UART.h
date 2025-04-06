@@ -3,6 +3,7 @@
 
 #include <8052.h>
 #include "../type.h"
+#include "../system.h"
 
 // Initialize UART with specified baud rate
 void UART_Init(u16 baudrate);

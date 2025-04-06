@@ -1,63 +1,63 @@
 #include "uart.h"
+#include <reg52.h>
 
-// Initialize UART with specified baud rate
+typedef unsigned char u8;
+typedef unsigned int  u16;
+
+// Initialize UART with specified baud rate using Timer 2
 void UART_Init(u16 baudrate)
 {
-    // Standard baud rate values for 11.0592MHz crystal
-    u8 th1_value;
-    
-    // Set Timer 1 mode 2 (8-bit auto-reload)
-    TMOD &= 0x0F;   // Clear all T1 bits
-    TMOD |= 0x20;   // Set T1 to mode 2
-    
-    // Set serial port mode 1 (8-bit UART, variable baud rate)
-    SCON = 0x50;    // Mode 1, Receiver enabled
-    
-    // Calculate TH1 value based on baud rate
-    switch(baudrate)
+    u16 reload;
+
+    SCON = 0x50;  // Serial mode 1, REN enabled
+
+    // Calculate reload value for Timer 2 (baud = Freq / (32 * (65536 - RCAP2)))
+    switch (baudrate)
     {
         case 9600:
-            th1_value = 0xFD;   // 9600 baud
-            PCON &= 0x7F;       // SMOD = 0
+            reload = 65536 - (CPU_CLK / (32UL * 9600));
             break;
-            
         case 19200:
-            th1_value = 0xFD;   // 19200 baud
-            PCON |= 0x80;       // SMOD = 1
+            reload = 65536 - (CPU_CLK / (32UL * 19200));
             break;
-            
         case 57600:
-            th1_value = 0xFF;   // 57600 baud
-            PCON |= 0x80;       // SMOD = 1
+            reload = 65536 - (CPU_CLK / (32UL * 57600));
             break;
-            
         case 115200:
-            th1_value = 0xFF;   // 115200 baud
-            PCON |= 0x80;       // SMOD = 1
+            reload = 65536 - (CPU_CLK / (32UL * 115200));
             break;
-            
-        default:    // Default to 9600
-            th1_value = 0xFD;
-            PCON &= 0x7F;
+        default:
+            reload = 65536 - (CPU_CLK / (32UL * 9600));
             break;
     }
-    
-    TH1 = TL1 = th1_value;     // Set timer value
-    TR1 = 1;                   // Start timer 1
+
+    // Load reload value into RCAP2 registers
+    RCAP2H = (u8)(reload >> 8);
+    RCAP2L = (u8)(reload & 0xFF);
+
+    // Also initialize TH2 and TL2 for immediate effect
+    TH2 = RCAP2H;
+    TL2 = RCAP2L;
+
+    // Configure Timer 2: auto-reload mode, baud rate generator
+    T2CON = 0x34;  // TCLK=1, RCLK=1, TR2=1 (start timer)
+
+    // No interrupts used here, disable for now
+    ES = 0;
 }
 
 // Send a single character
 void UART_SendChar(u8 ch)
 {
-    SBUF = ch;      // Load data into buffer
-    while(TI == 0); // Wait for transmission complete
-    TI = 0;         // Clear transmit interrupt flag
+    SBUF = ch;
+    while (TI == 0);
+    TI = 0;
 }
 
-// Send a string
+// Send a null-terminated string
 void UART_SendString(u8 *str)
 {
-    while(*str)
+    while (*str)
     {
         UART_SendChar(*str++);
     }
@@ -66,14 +66,13 @@ void UART_SendString(u8 *str)
 // Check if data is available
 u8 UART_DataAvailable()
 {
-    return RI;  // Return receive interrupt flag status
+    return RI;
 }
 
 // Receive a single character
 u8 UART_ReceiveChar()
 {
-    while(RI == 0); // Wait for reception complete
-    RI = 0;         // Clear receive interrupt flag
-    return SBUF;    // Return received data
+    while (RI == 0);
+    RI = 0;
+    return SBUF;
 }
-
