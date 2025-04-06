@@ -1,7 +1,7 @@
 #ifndef _DELAY_H_  
 #define _DELAY_H_ 
 
-#include <8051.h>
+#include <8052.h>
 #include "../type.h"
 #include "../system.h"
 

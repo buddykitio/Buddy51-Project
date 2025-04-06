@@ -36,7 +36,7 @@ If needed, you can modify these pin assignments in `LED_7SEGMENT.h`.
 The following example demonstrates how to display numbers on a 6-digit 7-segment display:
 
 ```c
-#include <8051.h> 
+#include <8052.h> 
 #include "../library/Delay/Delay.h"
 #include "../library/LED_7SEGMENT/LED_7SEGMENT.h"
 

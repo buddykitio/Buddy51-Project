@@ -1,7 +1,7 @@
 #ifndef __LED_7SEGMENT_H__
 #define __LED_7SEGMENT_H__
 
-#include <8051.h>          // 8051 microcontroller header
+#include <8052.h>          // 8051 microcontroller header
 #include "../type.h"       // Custom type definitions (likely contains u8, u16 etc.)
 #include "../Delay/Delay.h"// Delay function declarations
 #include "../system.h"

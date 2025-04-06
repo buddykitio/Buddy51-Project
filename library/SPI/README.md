@@ -30,7 +30,7 @@ If needed, you can modify these pin assignments in `SPI.h`.
 The following example demonstrates SPI communication using the 74165 & 74595 shift registers:
 
 ```c
-#include <8051.h> 
+#include <8052.h> 
 #include "../library/Delay/Delay.h"
 #include "../library/SPI/SPI.h"
 

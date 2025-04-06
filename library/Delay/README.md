@@ -17,7 +17,7 @@ This library provides delay functions for the 8051 microcontroller using timers.
 ## 📌 Usage Example
 
 ```c
-#include <8051.h>
+#include <8052.h>
 #include "Delay.h"
 
 void main() {

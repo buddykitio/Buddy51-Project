@@ -122,7 +122,7 @@ To choose between I2C or parallel mode, modify the `I2C_LCD` macro in your code:
 
 ### Example
 ```c
-#include <8051.h> 
+#include <8052.h> 
 #include "../library/LCD4/LCD4.h"
 #include "../library/Delay/Delay.h"
 #include "../library/DS1307/DS1307.h"

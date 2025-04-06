@@ -51,7 +51,7 @@ Additionally, users may **customize the keypad port** by modifying:
 The following example demonstrates how to read key presses from the 4x4 keypad:
 
 ```c
-#include <8051.h> 
+#include <8052.h> 
 #include "../library/LCD4/LCD4.h"
 #include "../library/Delay/Delay.h"
 #include "../library/KEYPAD4X4/KEYPAD4X4.h"

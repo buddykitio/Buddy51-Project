@@ -1,6 +1,4 @@
 #include "uart.h"
-#include <8051.h>  // SDCC's 8051 header
-
 
 // Initialize UART with specified baud rate
 void UART_Init(u16 baudrate)

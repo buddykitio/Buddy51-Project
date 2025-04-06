@@ -1,7 +1,7 @@
 #ifndef _UART_H_
 #define _UART_H_
 
-#include <8051.h>
+#include <8052.h>
 #include "../type.h"
 
 // Initialize UART with specified baud rate

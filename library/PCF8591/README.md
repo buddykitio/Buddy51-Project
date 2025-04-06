@@ -49,7 +49,7 @@ This library provides essential functions to interface with the PCF8591 ADC/DAC 
 The following example demonstrates how to read key presses from the 4x4 keypad:
 
 ```c
-#include <8051.h> 
+#include <8052.h> 
 #include "../library/Delay/Delay.h"
 #include "../library/PCF8591/PCF8591.h"
 #include "../library/UART/UART.h"

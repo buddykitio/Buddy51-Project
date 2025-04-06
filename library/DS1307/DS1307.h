@@ -2,7 +2,7 @@
 #define _DS1307_H_
 
 #include "../system.h"
-#include <8051.h>
+#include <8052.h>
 #include "../type.h"
 #include "../I2C/I2C.h"
 #include "../Delay/Delay.h"
