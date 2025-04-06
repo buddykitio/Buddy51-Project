@@ -12,8 +12,8 @@ void UART_SendChar(u8 ch);
 // Send a string
 void UART_SendString(u8 *str);
 // Check if data is available
-u8 UART_DataAvailable();
+u8 UART_DataAvailable(void);
 // Receive a single character
-u8 UART_ReceiveChar();
+u8 UART_ReceiveChar(void);
 
 #endif

@@ -1,5 +1,4 @@
 #include "uart.h"
-#include <reg52.h>
 
 // Initialize UART with specified baud rate using Timer 2
 void UART_Init(u16 baudrate)
@@ -61,13 +60,13 @@ void UART_SendString(u8 *str)
 }
 
 // Check if data is available
-u8 UART_DataAvailable()
+u8 UART_DataAvailable(void)
 {
     return RI;
 }
 
 // Receive a single character
-u8 UART_ReceiveChar()
+u8 UART_ReceiveChar(void)
 {
     while (RI == 0);
     RI = 0;

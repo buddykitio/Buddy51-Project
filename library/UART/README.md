@@ -19,9 +19,13 @@ This library provides essential functions for serial communication via UART on 8
 ## 📌 **Typical Usage Example**
 
 ```c
-#include "uart.h"
+#include <8052.h>
+#include "../library/UART/UART.h"
+#include "../library/Delay/Delay.h"
 
-void main() {
+#define LED P1_1
+
+void main(void) {
 u8 received;
     // Initialize UART at 9600 baud
     UART_Init(9600);
