@@ -43,7 +43,7 @@ This example initializes the RTC and continuously updates the **LCD display** wi
 ```c
 #include "../I2C/I2C.h"
 #include "../LCD4/LCD4.h"
-#include "../RTC/RTC.h"
+#include "../DS1307/DS1307.h"
 #include "../Delay/Delay.h"
 
 void main() {
