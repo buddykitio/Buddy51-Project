@@ -4,7 +4,7 @@ setlocal enabledelayedexpansion
 rem Define libraries to use
 set USE=
 
-rem Available libraries: Delay LCD4 I2C EEPROM DS1307 SPI LED_7SEGMENT KEYPAD4X4 UART PCF8591
+rem Available libraries: Delay LCD4 I2C EEPROM DS1307 SPI LED_7SEGMENT KEYPAD4X4 UART PCF8591 MPU6050
 
 rem Create necessary folders if they don't exist
 if not exist object mkdir object
