@@ -23,7 +23,7 @@ set REL_COUNT=0
 for %%f in (src\*.c) do (
     echo Compiling: %%f
     set /A C_COUNT+=1
-    sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 "%%f" -o object\ 2>>object\errors.log
+    sdcc -c -mmcs51 --model-small --nooverlay --no-xinit-opt --code-loc 0x0000 --xram-loc 0 --data-loc 0 --disable-warning 196 "%%f" -o object\ 2>>object\errors.log
 )
 
 rem Step 2: Compile libraries specified in USE
@@ -32,7 +32,7 @@ for %%L in (%USE%) do (
         if exist .\library\%%L\%%L.c (
             echo Compiling Library: .\library\%%L\%%L.c
             set /A C_COUNT+=1
-           sdcc -c -mmcs51 --model-small --no-c-code-in-asm --disable-warning 196 ".\library\%%L\%%L.c" -o object\ 2>>object\errors.log
+           sdcc -c -mmcs51 --model-small --nooverlay --no-xinit-opt --code-loc 0x0000 --xram-loc 0 --data-loc 0 --disable-warning 196 ".\library\%%L\%%L.c" -o object\ 2>>object\errors.log
         ) else (
             echo WARNING: %%L\%%L.c not found, skipping...
         )
@@ -74,4 +74,8 @@ if %errorlevel% neq 0 (
     exit /b 1
 )
 
+echo ---------------------------------------------------------
+type object\output.mem
+echo ---------------------------------------------------------
+echo:
 echo Build completed. HEX file saved in release\output.hex
