@@ -12,7 +12,7 @@
 extern s16 AccX, AccY, AccZ;
 extern s16 GyroX, GyroY, GyroZ;
 
-void MPU6050_Init(void);
-void MPU6050_ReadAll(void);
+static void MPU6050_Init(void);
+static void MPU6050_ReadAll(void);
 
 #endif

@@ -1,11 +1,10 @@
 #include "MPU6050.h"
 #include "../I2C/I2C.h"
 
-s16 AccX, AccY, AccZ;
-s16 GyroX, GyroY, GyroZ;
+static s16 AccX, AccY, AccZ;
+static s16 GyroX, GyroY, GyroZ;
 
-void MPU6050_Init(void)
-{
+static void MPU6050_Init(void) {
     I2C_Init();
     I2C_Start();
     I2C_Write(MPU_ADDR);
@@ -20,8 +19,7 @@ void MPU6050_Init(void)
     I2C_Stop();
 }
 
-void MPU6050_ReadAll(void)
-{
+static void MPU6050_ReadAll(void) {
     u8 data[14];
 
     I2C_Start();

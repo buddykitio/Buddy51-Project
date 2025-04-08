@@ -9,8 +9,8 @@
 #define MISO  P3_6  // Master In Slave Out
 #define SCK   P3_5  // Serial Clock
 
-void SPI_Init();
-void SPI_Write(u8 data);
-u8 SPI_Read();
+static void SPI_Init();
+static void SPI_Write(u8 data);
+static u8 SPI_Read();
 
 #endif

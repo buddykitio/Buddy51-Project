@@ -5,14 +5,14 @@
 #define SCK   P3_5  // Serial Clock
 
 // SPI Initialization
-void SPI_Init() {
+static void SPI_Init() {
     MISO = 1;
     MOSI = 0;  // MOSI as output
     SCK = 0;   // Set clock low
 }
 
 // SPI Write (Master -> Slave)
-void SPI_Write(u8 data) {
+static void SPI_Write(u8 data) {
     u8 mask = 0x80;
 
     while(mask) {
@@ -26,7 +26,7 @@ void SPI_Write(u8 data) {
 }
 
 // SPI Read (Slave -> Master)
-u8 SPI_Read() {
+static u8 SPI_Read() {
     u8 data = 0, mask = 0x80;
     
     while(mask){

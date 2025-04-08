@@ -28,7 +28,7 @@
 #define KEY43 '='
 #define KEY44 '+'
 
-u8 KEYPAD_GetCode(void);
-u8 KEYPAD_GetKey(void);
+static u8 KEYPAD_GetCode(void);
+static u8 KEYPAD_GetKey(void);
 
 #endif
