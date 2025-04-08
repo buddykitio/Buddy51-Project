@@ -115,4 +115,4 @@ echo ---------------------------------------------------------
 type object\output.mem
 echo ---------------------------------------------------------
 echo:
-echo ✅ Build completed. HEX saved in release\output.hex
+echo Build completed. HEX saved in release\output.hex
