@@ -3,7 +3,7 @@
 // Navigate to a specified EEPROM address. 
 // If mode is 0, it writes the address for writing.
 // If mode is 1, it writes the address for reading.
-static u8 EEPROM_Goto(const u8 address, u8 mode){
+ u8 EEPROM_Goto(const u8 address, u8 mode){
 	I2C_Start();                // Start I2C communication
 	if(I2C_Write(IC24LC16)){    // Write EEPROM address
 		I2C_Stop();              // Stop I2C if write failed
@@ -20,7 +20,7 @@ static u8 EEPROM_Goto(const u8 address, u8 mode){
 }
 
 // Write a single byte to EEPROM
-static u8 EEPROM_Write(u8 address, u8 value) {
+ u8 EEPROM_Write(u8 address, u8 value) {
     I2C_Start();                     // Start I2C communication
     if (I2C_Write(IC24LC16)) {        // Send EEPROM device address (write mode)
         I2C_Stop();
@@ -34,7 +34,7 @@ static u8 EEPROM_Write(u8 address, u8 value) {
 }
 
 // Read a single byte from EEPROM
-static u8 EEPROM_Read(u8 address, u8* value) {
+ u8 EEPROM_Read(u8 address, u8* value) {
     I2C_Start();                     // Start I2C communication
     if (I2C_Write(IC24LC16)) {        // Send EEPROM device address (write mode)
         I2C_Stop();
@@ -49,7 +49,7 @@ static u8 EEPROM_Read(u8 address, u8* value) {
 }
 
 // Write a block of data to EEPROM starting from the specified address
-static u8 EEPROM_Writes(u8 address, void* vData, u8 length){
+ u8 EEPROM_Writes(u8 address, void* vData, u8 length){
 	u8* pData;
 	u8 i;
 
@@ -86,7 +86,7 @@ static u8 EEPROM_Writes(u8 address, void* vData, u8 length){
 }
 
 // Read a block of data from EEPROM starting from the specified address
-static u8 EEPROM_Reads(u8 address, void* vData, u8 length){
+ u8 EEPROM_Reads(u8 address, void* vData, u8 length){
 	u8* pData;
 	u8 i;
 

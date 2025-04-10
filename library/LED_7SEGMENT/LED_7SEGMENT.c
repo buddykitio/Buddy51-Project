@@ -2,7 +2,7 @@
 
 cbyte SEG_LOOKUP[10] = {_0, _1, _2, _3, _4, _5, _6, _7, _8, _9};
 
-static int strlen(const char *str) {
+ int strlen(const char *str) {
  int length = 0;
     while (str[length] != '\0') {
         length++;  // Increment the counter until the null terminator is found
@@ -10,10 +10,10 @@ static int strlen(const char *str) {
     return length;
 }
 
-static u8 SEG_BUFF[6] = {0, 0, 0, 0, 0, 0};
-static u8 disPos = 0;
+ u8 SEG_BUFF[6] = {0, 0, 0, 0, 0, 0};
+ u8 disPos = 0;
 
-static void SEG_Loop(){
+ void SEG_Loop(){
     // Optionally, reload timer value here to control blinking frequency
 
 #if DISPLAY_TIMER
@@ -60,7 +60,7 @@ static void SEG_Loop(){
     }
 }
 
-static void SEG_Init(void) {
+ void SEG_Init(void) {
 #if DISPLAY_TIMER
     // Configure Timer 0 Mode 2
     TMOD &= 0x0F;
@@ -85,7 +85,7 @@ static void SEG_Init(void) {
     EA = 1; // Enable all interrupts
 }
 
-static void SEG_OutData(const char *datas) {
+ void SEG_OutData(const char *datas) {
 u8 i, d, decimalPos, startIndex, digitsToDisplay;
 int j;
 long dat = 0;     // Variable to hold the parsed number

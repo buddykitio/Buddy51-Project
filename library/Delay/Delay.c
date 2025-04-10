@@ -1,13 +1,13 @@
 #include "Delay.h"
 
-static void DelayXus(u8 xUs) {
+ void DelayXus(u8 xUs) {
 	while(xUs != 0) {
 		NOP();
 		xUs--;
 	}
 }
 
-static void DelayXms(u16 xMs){
+ void DelayXms(u16 xMs){
 #if DELAY_TIMER //Timer 1
 	TMOD &= 0xF0;
 	TMOD |= 0x01;

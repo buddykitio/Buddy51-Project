@@ -58,10 +58,10 @@
 #define _9 _SEG(0x6F)
 
 
-static int strlen(const char *str);
-static void SEG_Loop();
-static void SEG_Init(void);
-static void SEG_OutData(const char *datas);
+ int strlen(const char *str);
+ void SEG_Loop();
+ void SEG_Init(void);
+ void SEG_OutData(const char *datas);
 
 #if DISPLAY_TIMER
 #define DISPLAY_INTERRUPT()\

@@ -22,7 +22,7 @@ void I2C_Stop(void){
 }
 
 // Write data to I2C (8-bit data sent MSB first)
-static u8 I2C_Write(const u8 dat){
+u8 I2C_Write(const u8 dat){
 	u8 mask = 0x80;    // Start with the MSB (bit 7)
 	
 	// Loop through each bit of the data byte (MSB to LSB)
@@ -47,7 +47,7 @@ static u8 I2C_Write(const u8 dat){
 }
 
 // Read data from I2C (8-bit data received, ACK sent after each byte)
-static u8 I2C_Read(u8 ack){
+u8 I2C_Read(u8 ack){
 	u8 i, dat = 0;
 
 	SDA = 1;  // Prepare SDA to receive data (release it for input)

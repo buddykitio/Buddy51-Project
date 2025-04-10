@@ -6,14 +6,14 @@
 #include "../system.h"
 
 // Initialize UART with specified baud rate
-static void UART_Init(u16 baudrate);
+ void UART_Init(u16 baudrate);
 // Send a single character
-static void UART_SendChar(u8 ch);
+ void UART_SendChar(u8 ch);
 // Send a string
-static void UART_SendString(u8 *str);
+ void UART_SendString(u8 *str);
 // Check if data is available
-static u8 UART_DataAvailable(void);
+ u8 UART_DataAvailable(void);
 // Receive a single character
-static u8 UART_ReceiveChar(void);
+ u8 UART_ReceiveChar(void);
 
 #endif

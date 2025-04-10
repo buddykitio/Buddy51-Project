@@ -41,10 +41,10 @@ Ensure these libraries are included in your project.
 This example initializes the RTC and continuously updates the **LCD display** with the current time.
 
 ```c
-#include "../I2C/I2C.h"
-#include "../LCD4/LCD4.h"
-#include "../DS1307/DS1307.h"
-#include "../Delay/Delay.h"
+#include "../library/I2C/I2C.h"
+#include "../library/LCD4/LCD4.h"
+#include "../library/DS1307/DS1307.h"
+#include "../library/Delay/Delay.h"
 
 void main() {
     u8 buff[17];
