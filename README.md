@@ -37,7 +37,7 @@ SDCC (Small Device C Compiler) is required to build the project.
    ```cmd
    sdcc --version
    ```
-
+      
 ### **🔹 Linux (Debian/Ubuntu)**
 ```bash
 sudo apt update
@@ -53,6 +53,25 @@ sdcc --version
 
 ---
 
+## ⚙️ **How to Install Nuvoton ISP**
+Novoton ISP is required to flash code.
+
+1. Download Nuvoton ISP from the [Nuvoton 8051 ISP Official Website](https://www.nuvoton.com/resource-download.jsp?tp_GUID=SW0320120105135349).
+2. Verify the installation.
+
+## ⚙️ **How to Install VScode**
+VScode is required to edit code.
+
+### **🔹 Windows**                         
+Download VScode from the [VScode Official Website](https://code.visualstudio.com/sha/download?build=stable&os=win32-arm64-user).
+### **🔹 Linux (Debian/Ubuntu)** 
+Download VScode from the [VScode Official Website](https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64).
+### **🔹MacOS (Using Homebrew)** 
+Download VScode from the [VScode Official Website](https://code.visualstudio.com/sha/download?build=stable&os=darwin-universal).
+
+🔹 Verify the installation.
+
+   
 ## ⚙️ **How to Build**
 
 ### **🔹 Windows**
@@ -88,6 +107,7 @@ clean.bat
 ```
 
 ---
+
 
 ## 📢 **Notes**
 - **Ensure SDCC is installed and available in your system's PATH.**
