@@ -60,16 +60,11 @@ Novoton ISP is required to flash code.
 2. Verify the installation.
 
 ## ⚙️ **How to Install VScode**
-VScode is required to edit code.
+  VScode is required to edit code.
 
-### **🔹 Windows**                         
-Download VScode from the [VScode Official Website](https://code.visualstudio.com/sha/download?build=stable&os=win32-arm64-user).
-### **🔹 Linux (Debian/Ubuntu)** 
-Download VScode from the [VScode Official Website](https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64).
-### **🔹MacOS (Using Homebrew)** 
-Download VScode from the [VScode Official Website](https://code.visualstudio.com/sha/download?build=stable&os=darwin-universal).
+  1. Click here to download [VScode Official](https://code.visualstudio.com/download#)
 
-🔹 Verify the installation.
+ 2. Verify the installation.
 
    
 ## ⚙️ **How to Build**
