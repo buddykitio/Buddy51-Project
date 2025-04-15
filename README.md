@@ -12,6 +12,8 @@ This is a complete 8051 project template for **SDCC (Small Device C Compiler)**-
 ├──── DS1307      # I2C based DS1307 RTC Library
 ├──── EEPROM      # I2C based 24C02/04/08/16 EEPROM memory library
 ├──── I2C         # I2C communication library
+├──── PCF8591     # I2C based ADC library
+├──── MPU6050     # I2C based MPU 6050 library
 ├──── KEYPAD4X4   # 4x4 matrix keypad library
 ├──── LCD4        # 4-bit LCD parallel & I2C supported library
 ├──── LED7SEGMENT # 6 digit, 7 segment with dot and negative support library
