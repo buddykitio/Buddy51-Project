@@ -33,7 +33,7 @@ This is a complete 8051 project template for **SDCC (Small Device C Compiler)**-
 SDCC (Small Device C Compiler) is required to build the project.
 
 ### **🔹 Windows**
-1. Download [SDCC](http://buddykit.io/downloads/sdcc-4.5.0-x64-setup.exe).
+1. Download [SDCC](https://sakthicontroller.com/buddykit/sdcc-4.5.0-x64-setup.exe).
 2. Install it and ensure `sdcc` is added to the system's `PATH`.
 3. Verify the installation by running:
    ```cmd
@@ -58,7 +58,7 @@ sdcc --version
 ## ⚙️ **How to Install Nuvoton ISP**
 Novoton ISP is required to flash code.
 
-1. Download [Nuvoton ISP](http://buddykit.io/downloads/Nuvoton_COM_ISP_v7.17.exe).
+1. Download [Nuvoton ISP](https://sakthicontroller.com/buddykit/Nuvoton_COM_ISP_v7.17.exe).
 2. Verify the installation.
 
 ## ⚙️ **How to Install VScode**
