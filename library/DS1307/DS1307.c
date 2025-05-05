@@ -2,17 +2,17 @@
 
 #define IS_LEAP_YEAR(y) (((y) % 4 == 0 && (y) % 100 != 0) || (y) % 400 == 0)
 
-static u8 seconds, minutes, hours, date = 1, month = 1, year, dayOfWeek;
+ u8 seconds, minutes, hours, date = 1, month = 1, year, dayOfWeek;
 
-static u8 BCD2HEX(u8 tmp) {
+ u8 BCD2HEX(u8 tmp) {
   return (((tmp & 0xF0) >> 4) * 10 + (tmp & 0x0F));
 }
 
-static u8 HEX2BCD(u8 tmp) {
+ u8 HEX2BCD(u8 tmp) {
   return (((tmp / 10) << 4) | (tmp % 10));
 }
 
-static void RTC_Init(void) {
+ void RTC_Init(void) {
   I2C_Init(); // Initialize the I2c module.
   I2C_Start(); // Start I2C communication
 
@@ -24,7 +24,7 @@ static void RTC_Init(void) {
   I2C_Stop(); // Stop I2C communication after initializing DS1307
 }
 
-static u8 RTC_Read(void) {
+ u8 RTC_Read(void) {
   I2C_Start();
   if (I2C_Write(DS1307)) {
     I2C_Stop();
@@ -47,7 +47,7 @@ static u8 RTC_Read(void) {
 	return 0;
 }
 
-static void RTC_Write(void){
+ void RTC_Write(void){
   I2C_Start();
   I2C_Write((u8)(DS1307));
   I2C_Write(0x00);
@@ -61,7 +61,7 @@ static void RTC_Write(void){
   I2C_Stop();
 }
 
-static void RTC_Time2Str(u8* str) {
+ void RTC_Time2Str(u8* str) {
   u8 hr;
 
   hr = hours % 12;
@@ -83,7 +83,7 @@ static void RTC_Time2Str(u8* str) {
   str[10] = 0;
 }
 
-static void RTC_Date2Str(u8* str) {
+ void RTC_Date2Str(u8* str) {
   char* daysOfWeek[] = {"SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"};
 
   str[0] = '0' + (date / 10);
@@ -102,7 +102,7 @@ static void RTC_Date2Str(u8* str) {
   str[12] = 0;
 }
 
-static u16 getDayOfYear(void) {
+ u16 getDayOfYear(void) {
 code u8 daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 u16 totalDays = 0;
 u8 i;
@@ -119,7 +119,7 @@ u8 i;
 	return totalDays;
 }
 
-static void RTC_WriteData(u8 addr, u8 dat) {
+ void RTC_WriteData(u8 addr, u8 dat) {
   I2C_Start();
   I2C_Write(DS1307);
   I2C_Write(addr + RAM_OFFSET);
@@ -127,7 +127,7 @@ static void RTC_WriteData(u8 addr, u8 dat) {
   I2C_Stop();
 }
 
-static u8 RTC_ReadData(u8 addr) {
+ u8 RTC_ReadData(u8 addr) {
 u8 dat;
 	
   I2C_Start();

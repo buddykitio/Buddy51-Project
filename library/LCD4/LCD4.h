@@ -59,18 +59,18 @@
 #define LCD_COLS 16       // Number of columns per row
 
 /* Function Prototypes */
-static void LCD_Command(u8 cmd);         // Send command to LCD
-static void LCD_Data(u8 dat);            // Send data to LCD
-static void LCD_Init(void);              // Initialize LCD
-static void LCD_Puts(pu8 ptr);   // Print string to LCD
-static void LCD_Goto(u8 r, u8 c);        // Move cursor to (row, column)
-static void LCD_Clear(u8 row, u8 col, u8 size); // Clear portion of display
-static void LCD_ScrollLeft(void);        // Scroll display left
-static void LCD_ScrollRight(void);       // Scroll display right
-static void LCD_LeftToRight(void);       // Set left-to-right text direction
-static void LCD_RightToLeft(void);       // Set right-to-left text direction
-static void LCD_Autoscroll(void);        // Enable auto-scrolling
-static void LCD_NoAutoscroll(void);      // Disable auto-scrolling
+ void LCD_Command(u8 cmd);         // Send command to LCD
+ void LCD_Data(u8 dat);            // Send data to LCD
+ void LCD_Init(void);              // Initialize LCD
+ void LCD_Puts(pu8 ptr);   // Print string to LCD
+ void LCD_Goto(u8 r, u8 c);        // Move cursor to (row, column)
+ void LCD_Clear(u8 row, u8 col, u8 size); // Clear portion of display
+ void LCD_ScrollLeft(void);        // Scroll display left
+ void LCD_ScrollRight(void);       // Scroll display right
+ void LCD_LeftToRight(void);       // Set left-to-right text direction
+ void LCD_RightToLeft(void);       // Set right-to-left text direction
+ void LCD_Autoscroll(void);        // Enable auto-scrolling
+ void LCD_NoAutoscroll(void);      // Disable auto-scrolling
 
 #define LCD_ClearRow(a) LCD_Clear(a, 0, LCD_COLS)
 

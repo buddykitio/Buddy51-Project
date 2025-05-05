@@ -2,7 +2,7 @@
 
 #define KEY_MASK 0xF0
 
-static u8 KEYPAD_GetCode(void){
+ u8 KEYPAD_GetCode(void){
 u8 key;
     KEY_PORT = KEY_MASK;
     _nop_();
@@ -61,10 +61,10 @@ cbyte KEY_LOOKUP[] = {
 };
 
 // Variable to store the last key pressed (for debouncing)
-static u8 lastKey;
+ u8 lastKey;
 
 // Function to get the key pressed with debounce
-static u8 KEYPAD_GetKey(void){
+ u8 KEYPAD_GetKey(void){
 	u8 curKey;
 	curKey = KEYPAD_GetCode();  // Get the current key pressed
 

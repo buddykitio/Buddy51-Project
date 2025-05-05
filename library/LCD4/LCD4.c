@@ -1,12 +1,12 @@
 #include "LCD4.H"
 
-static u8 _displaymode = 0x00; // Default: Left-to-right, no autoscroll
+ u8 _displaymode = 0x00; // Default: Left-to-right, no autoscroll
 
 #if I2C_LCD
-static u8 _lcd_data = 0x08;
+ u8 _lcd_data = 0x08;
 #endif
 
-static void LCD_Nibble(u8 value) {
+ void LCD_Nibble(u8 value) {
 #if I2C_LCD
     _lcd_data &= 0x0F;
     _lcd_data |= (data << 4); // Shift to match LCD nibble format
@@ -34,7 +34,7 @@ static void LCD_Nibble(u8 value) {
 }
 
 // Send command to LCD
-static void LCD_Command(u8 cmd) {
+ void LCD_Command(u8 cmd) {
 #if I2C_LCD
     _lcd_data &= ~0x01;
 #else
@@ -47,7 +47,7 @@ static void LCD_Command(u8 cmd) {
 }
 
 // Send data to LCD
-static void LCD_Data(u8 dat) {
+ void LCD_Data(u8 dat) {
 #if I2C_LCD
     _lcd_data |= 0x01;
 #else
@@ -60,7 +60,7 @@ static void LCD_Data(u8 dat) {
 }
 
 // Initialize LCD
-static void LCD_Init(void) {  
+ void LCD_Init(void) {  
 #if !I2C_LCD
     P2 = 0x00;
     P2 = 0xFF; // Configure as push-pull
@@ -95,14 +95,14 @@ static void LCD_Init(void) {
 }
 
 // Print a string
-static void LCD_Puts(pu8 ptr) {
+ void LCD_Puts(pu8 ptr) {
     while (*ptr) {
         LCD_Data(*ptr++);
     }
 }
 
 // Move cursor to (row, column)
-static void LCD_Goto(u8 r, u8 c) {
+ void LCD_Goto(u8 r, u8 c) {
     if (r == 1) {
         LCD_Command(0x80 + c);
     } else {
@@ -111,7 +111,7 @@ static void LCD_Goto(u8 r, u8 c) {
 }
 
 // Clear part of the display
-static void LCD_Clear(u8 row, u8 col, u8 size) {
+ void LCD_Clear(u8 row, u8 col, u8 size) {
     LCD_Goto(row, col);
     if (size + col > LCD_COLS)
         size = LCD_COLS - col;
@@ -122,35 +122,35 @@ static void LCD_Clear(u8 row, u8 col, u8 size) {
 }
 
 // Scroll display left 
-static void LCD_ScrollLeft(void) {
+ void LCD_ScrollLeft(void) {
     LCD_Command(LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVELEFT);
 }
 
 // Scroll display right 
-static void LCD_ScrollRight(void) {
+ void LCD_ScrollRight(void) {
     LCD_Command(LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVERIGHT);
 }
 
 // Set left-to-right text direction
-static void LCD_LeftToRight(void) {
+ void LCD_LeftToRight(void) {
     _displaymode |= LCD_ENTRYLEFT;
     LCD_Command(LCD_ENTRYMODESET | _displaymode);
 }
 
 // Set right-to-left text direction
-static void LCD_RightToLeft(void) {
+ void LCD_RightToLeft(void) {
     _displaymode &= ~LCD_ENTRYLEFT;
     LCD_Command(LCD_ENTRYMODESET | _displaymode);
 }
 
 // Enable autoscroll (text shifts automatically)
-static void LCD_Autoscroll(void) {
+ void LCD_Autoscroll(void) {
     _displaymode |= LCD_ENTRYSHIFTINC;
     LCD_Command(LCD_ENTRYMODESET | _displaymode);
 }
 
 // Disable autoscroll (default)
-static void LCD_NoAutoscroll(void) {
+ void LCD_NoAutoscroll(void) {
     _displaymode &= ~LCD_ENTRYSHIFTINC;
     LCD_Command(LCD_ENTRYMODESET | _displaymode);
 }

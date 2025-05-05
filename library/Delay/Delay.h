@@ -12,7 +12,7 @@
 #define THX ((TIMER_RELOAD >> 8) & 0xFF)  // High byte
 #define TLX (TIMER_RELOAD & 0xFF)         // Low byte
 
-static void DelayXus(u8 xUs);
-static void DelayXms(u16 xMs); //uses timer 1/0
+ void DelayXus(u8 xUs);
+ void DelayXms(u16 xMs); //uses timer 1/0
 
 #endif

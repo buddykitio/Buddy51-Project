@@ -1,7 +1,7 @@
 #include "uart.h"
 
 // Initialize UART with specified baud rate using Timer 2
-static void UART_Init(u16 baudrate) {
+ void UART_Init(u16 baudrate) {
     u16 reload;
 
     SCON = 0x50;  // Serial mode 1, REN enabled
@@ -42,26 +42,26 @@ static void UART_Init(u16 baudrate) {
 }
 
 // Send a single character
-static void UART_SendChar(u8 ch) {
+ void UART_SendChar(u8 ch) {
     SBUF = ch;
     while (TI == 0);
     TI = 0;
 }
 
 // Send a null-terminated string
-static void UART_SendString(u8 *str) {
+ void UART_SendString(u8 *str) {
     while (*str) {
         UART_SendChar(*str++);
     }
 }
 
 // Check if data is available
-static u8 UART_DataAvailable(void) {
+ u8 UART_DataAvailable(void) {
     return RI;
 }
 
 // Receive a single character
-static u8 UART_ReceiveChar(void) {
+ u8 UART_ReceiveChar(void) {
     while (RI == 0);
     RI = 0;
     return SBUF;

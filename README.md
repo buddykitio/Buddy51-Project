@@ -12,6 +12,8 @@ This is a complete 8051 project template for **SDCC (Small Device C Compiler)**-
 ├──── DS1307      # I2C based DS1307 RTC Library
 ├──── EEPROM      # I2C based 24C02/04/08/16 EEPROM memory library
 ├──── I2C         # I2C communication library
+├──── PCF8591     # I2C based ADC library
+├──── MPU6050     # I2C based MPU 6050 library
 ├──── KEYPAD4X4   # 4x4 matrix keypad library
 ├──── LCD4        # 4-bit LCD parallel & I2C supported library
 ├──── LED7SEGMENT # 6 digit, 7 segment with dot and negative support library
@@ -31,13 +33,13 @@ This is a complete 8051 project template for **SDCC (Small Device C Compiler)**-
 SDCC (Small Device C Compiler) is required to build the project.
 
 ### **🔹 Windows**
-1. Download SDCC from the [SDCC Official Website](https://sourceforge.net/projects/sdcc/).
+1. Download [SDCC](https://sakthicontroller.com/buddykit/sdcc-4.5.0-x64-setup.exe).
 2. Install it and ensure `sdcc` is added to the system's `PATH`.
 3. Verify the installation by running:
    ```cmd
    sdcc --version
    ```
-
+      
 ### **🔹 Linux (Debian/Ubuntu)**
 ```bash
 sudo apt update
@@ -53,6 +55,20 @@ sdcc --version
 
 ---
 
+## ⚙️ **How to Install Nuvoton ISP**
+Novoton ISP is required to flash code.
+
+1. Download [Nuvoton ISP](https://sakthicontroller.com/buddykit/Nuvoton_COM_ISP_v7.17.exe).
+2. Verify the installation.
+
+## ⚙️ **How to Install VScode**
+  VScode is required to edit code.
+
+  1. Click here to download [VScode Official](https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user)
+
+ 2. Verify the installation.
+
+   
 ## ⚙️ **How to Build**
 
 ### **🔹 Windows**
@@ -88,6 +104,7 @@ clean.bat
 ```
 
 ---
+
 
 ## 📢 **Notes**
 - **Ensure SDCC is installed and available in your system's PATH.**

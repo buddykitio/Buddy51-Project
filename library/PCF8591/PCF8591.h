@@ -22,20 +22,20 @@
 #define ADC_TWO_DIFFERENTIAL    0x30
 
 
-static void PCF8591_Init(void);
-static void PCF8591_WriteDAC(u8 value);
-static u8 PCF8591_ReadADC(u8 channel);
+ void PCF8591_Init(void);
+ void PCF8591_WriteDAC(u8 value);
+ u8 PCF8591_ReadADC(u8 channel);
 
-static u8 PCF8591_ReadDifference30(void);
-static u8 PCF8591_ReadDifference31(void);
-static u8 PCF8591_ReadDifference32(void);
+ u8 PCF8591_ReadDifference30(void);
+ u8 PCF8591_ReadDifference31(void);
+ u8 PCF8591_ReadDifference32(void);
 
-static u8 PCF8591_ReadDifference01(void);
-static u8 PCF8591_ReadDifference23(void);
+ u8 PCF8591_ReadDifference01(void);
+ u8 PCF8591_ReadDifference23(void);
 
-static void PCF8591_EnableDAC(void);
-static void PCF8591_DisableDAC(void);
+ void PCF8591_EnableDAC(void);
+ void PCF8591_DisableDAC(void);
 
-static void PCF8591_ChangeMode(u8 mode);
+ void PCF8591_ChangeMode(u8 mode);
 
 #endif
