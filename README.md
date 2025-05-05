@@ -33,7 +33,7 @@ This is a complete 8051 project template for **SDCC (Small Device C Compiler)**-
 SDCC (Small Device C Compiler) is required to build the project.
 
 ### **🔹 Windows**
-1. Download [SDCC](https://sakthicontroller.com/buddykit/sdcc-4.5.0-x64-setup.exe).
+1. Download SDCC [x64](https://sakthicontroller.com/buddykit/sdcc-4.5.0-x64-setup.exe) [x86](https://sakthicontroller.com/buddykit/sdcc-4.5.0-x86-setup.exe)..
 2. Install it and ensure `sdcc` is added to the system's `PATH`.
 3. Verify the installation by running:
    ```cmd
