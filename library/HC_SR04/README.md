@@ -73,7 +73,8 @@ void main() {
 ```
 
 ## 📌 Troubleshooting
-### Problem Possible Cause
-Always returns -1	ECHO pin not receiving signal or miswired
-Very inaccurate or zero values	Sensor not facing reflective object
-Random spikes in distance	Electrical noise or timing issues
+| Problem                        | Possible Cause                             |
+|--------------------------------|--------------------------------------------|
+| Always returns -1              | ECHO pin not receiving signal or miswired  |
+| Very inaccurate or zero values | Sensor not facing reflective object        |
+| Random spikes in distance      | Electrical noise or timing issues          |
