@@ -56,17 +56,10 @@ The following example demonstrates how to read key presses from the 4x4 keypad:
 #include "../library/Delay/Delay.h"
 #include "../library/KEYPAD4X4/KEYPAD4X4.h"
 
-// Function to delay for approximately 1 second
-void Delay1s(void) {
-    unsigned int i;
-    for (i = 0; i < 20000; i++) {
-        DelayXus(5);
-    }
-}
 
 void main(void) {
     u8 key;
-
+    u8 buffer[17]
     LCD_Init();   
     LCD_Puts("HI BUDDIES!");
    
