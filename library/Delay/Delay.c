@@ -7,10 +7,10 @@
 	}
 }
 
- void DelayXms(u16 xMs){
+void DelayXms(u16 xMs){
 #if DELAY_TIMER //Timer 1
-	TMOD &= 0xF0;
-	TMOD |= 0x01;
+	TMOD &= 0x0F;
+	TMOD |= 0x10;
 	while(xMs--){
 		TH1 = THX;
 		TL1 = TLX;
@@ -21,8 +21,8 @@
 	}
 
 #else //Timer 0
-	TMOD &= 0x0F;
-	TMOD |= 0x10;
+	TMOD &= 0xF0;
+	TMOD |= 0x01;
 	while(xMs--){
 		TH0 = THX;
 		TL0 = TLX;
