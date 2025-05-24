@@ -1,43 +1,49 @@
 # Servo Motor Control Library (Software PWM)
 
-## 📌 Overview
+### Overview
+This library provides software PWM control for hobby servo motors using **Timer 1** on the 8051 microcontroller. It calculates ON and OFF pulse durations based on the servo angle (0° to 180°) and generates the PWM signal accordingly.
 
-This library allows you to control a servo motor using software-based PWM pulses via GPIO pins on an 8051 microcontroller.
+### Function Summary
+| Function                              | Return Type | Description                                            |
+| ------------------------------------- | ----------- | ------------------------------------------------------ |
+| `waitServoPulse(u16 angle, u8 isOff)` | `void`      | Generates ON or OFF pulse duration for the given angle |
 
-It generates ON and OFF pulse durations based on the desired angle (0–180°), suitable for standard hobby servo motors.
+### Macro Definitions
+| Macro       | Value | Description                 |
+| ----------- | ----- | --------------------------- |
+| `SERVO_ON`  | 0     | Generate ON pulse duration  |
+| `SERVO_OFF` | 1     | Generate OFF pulse duration |
 
----
+Use these with `waitServoPulse()` to specify the pulse phase.
 
-## 📌 Function Summary
+### How It Works
+* Standard servo requires a PWM signal every **20 ms (50 Hz)**.
+* ON time varies from:
 
-| Function Name            | Return Type | Description                                             |
-|--------------------------|-------------|---------------------------------------------------------|
-| `waitServoOnPulse(u16 angle)`  | `void`      | Generates a HIGH pulse (ON time) for the given angle     |
-| `waitServoOffPulse(u16 angle)` | `void`      | Generates a LOW pulse (OFF time) to complete the PWM cycle |
+  * \~0.5 ms (0°)
+  * \~1.5 ms (90°)
+  * \~2.5 ms (180°)
+* OFF time is the remainder to complete 20 ms.
+* Timer 1 is configured in 16-bit mode to measure pulse duration.
+* Pulse width is calculated as:
 
-> 🔧 These functions must be called in succession inside a loop to continuously generate PWM signals.
+```c
+pulseWidth = 500 + (angle * 2000 / 180);
+```
 
----
+* OFF time calculated as:
 
-## 📌 How It Works
+```c
+offDuration = 20000 - pulseWidth;
+```
 
-- **PWM Basics for Servo:**
-  - A standard servo expects a pulse every 20 ms (50 Hz).
-  - The ON time (HIGH signal) determines the angle:
-    - ~0.5 ms for 0°
-    - ~1.5 ms for 90°
-    - ~2.5 ms for 180°
-  - The OFF time fills the rest of the 20 ms period.
+* Timer ticks for 8051 (12 MHz clock) are computed:
 
-- **Example PWM Timing:**
-  - For 90°:
-    - `waitServoOnPulse(90)` → 1.5 ms ON
-    - `waitServoOffPulse(90)` → 18.5 ms OFF
+```c
+ticks = 65536 - (pulseWidth * 59 / 64);
+```
 
----
-
-## 📌 Usage Example
-
+### Usage Example
 ```c
 #include <8051.h>
 #include "..\library\Motor\Motor.h"
@@ -46,25 +52,36 @@ It generates ON and OFF pulse durations based on the desired angle (0–180°), 
 #define DOOR_MOTOR_PIN P1_1
 
 void main() {
-    // Configure Timer 0: Mode 1 (16-bit)
-    TMOD &= 0xF0;   // Clear lower 4 bits for Timer 0
-    TMOD |= 0x01;   // Set Mode 1 (16-bit)
-
     while (1) {
         DOOR_MOTOR_PIN = 1;
-        waitServoOnPulse(90);   // Send pulse for 90-degree position
+        waitServoPulse(90, SERVO_ON);  // ON pulse for 90°
         DOOR_MOTOR_PIN = 0;
-        waitServoOffPulse(90);  // Wait remaining time for PWM period
+        waitServoPulse(90, SERVO_OFF); // OFF pulse to complete 20 ms
     }
 }
 ```
 
-### 📌 Dependencies
-This library depends on the following modules:
-- Delay or Timer Utilities — used internally for pulse timing.
-- type.h — defines u16 (16-bit unsigned integer type).
+---
+### Dependencies
 
-### 📌 Notes
-- Make sure the servo is powered separately if it draws significant current.
-- This method uses software PWM, which blocks the CPU during the pulse. Use hardware PWM if CPU multitasking is needed.
-- Ensure that waitServoOnPulse() + waitServoOffPulse() total approximately 20 ms for stable servo operation.
+* Timer utilities or delay functions for pulse timing.
+* `type.h` defining `u16` (16-bit unsigned integer).
+
+---
+
+### Notes
+
+* Servo should have a separate power source if required.
+* This is a **blocking software PWM**, CPU is halted during delay.
+* Total ON + OFF pulse duration must be about 20 ms.
+* Use hardware PWM if multitasking is needed.
+
+---
+
+### Troubleshooting
+
+| Problem             | Possible Cause                        |
+| ------------------- | ------------------------------------- |
+| Servo jitters/stuck | Timer conflicts or busy-wait issues   |
+| Servo not moving    | Wiring mistakes or wrong pulse timing |
+| Random movement     | Power noise or insufficient delays    |

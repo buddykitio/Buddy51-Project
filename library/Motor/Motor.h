@@ -4,9 +4,9 @@
 #include <8052.h>
 #include "../type.h"
 
-// Generate ON duration based on servo angle (0-180 degrees)
-void waitServoOnPulse(u16 angle);
-// Generate OFF duration based on servo angle
-void waitServoOffPulse(u16 angle);
+void waitServoPulse(u16 angle, u8 isOff);
+
+#define SERVO_ON 0
+#define SERVO_OFF 1
 
 #endif 
