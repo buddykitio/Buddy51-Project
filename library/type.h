@@ -15,6 +15,17 @@ __endasm
 #define code __code
 #define CODE code
 
+#define xdata __xdata
+#define XDATA xdata
+
+#define idata __idata
+#define IDATA idata
+
+#define pdata __pdata
+#define PDATA pdata
+
+#define bit __bit
+
 #define push(x)		_push_(x)
 #define pop(x)		_pop_(x)
 #endif
