@@ -2,8 +2,6 @@
 
 // MoveServo - Generates a single PWM pulse corresponding to the specified angle (0–180°)
 // Compatible with standard hobby servos (typically 1ms to 2ms pulse width in a 20ms frame)
-// Uses Timer 0 in 16-bit mode to generate precise timing delays
-// Assumes a 12 MHz clock and 1T mode (Timer tick = 1.085 µs)
 
 // Generate ON duration based on servo angle (0-180 degrees)
 void waitServoOnPulse(u16 angle) {
@@ -11,7 +9,10 @@ void waitServoOnPulse(u16 angle) {
 
     if (angle > 180)
         angle = 180;
-
+    
+    TMOD &= 0x0F;   // Clear lower 4 bits for Timer 0
+    TMOD |= 0x10;   // Set Mode 1 (16-bit)
+    
     // Convert angle to pulse width: 500us (0°) to 2500us (180°)
     pulseWidth = 500 + ((u32)angle * 2000) / 180;
 
@@ -19,16 +20,16 @@ void waitServoOnPulse(u16 angle) {
     onTime = 65536 - (((u32)pulseWidth * 59) >> 6);
 
     // Setup Timer 0 for ON duration
-    TR0 = 0;                    // Stop Timer 0
-    TH0 = onTime >> 8;
-    TL0 = onTime & 0xFF;
-    TF0 = 0;                    // Clear overflow flag
-    TR0 = 1;                    // Start timer
+    TR1 = 0;                    // Stop Timer 0
+    TH1 = onTime >> 8;
+    TL1 = onTime & 0xFF;
+    TF1 = 0;                    // Clear overflow flag
+    TR1 = 1;                    // Start timer
 
-    while (!TF0);               // Wait until ON time over
+    while (!TF1);               // Wait until ON time over
 
-    TR0 = 0;                    // Stop Timer
-    TF0 = 0;                    // Clear flag
+    TR1 = 0;                    // Stop Timer
+    TF1 = 0;                    // Clear flag
 }
 
 // Generate OFF duration based on servo angle
@@ -37,7 +38,9 @@ void waitServoOffPulse(u16 angle) {
 
     if (angle > 180)
         angle = 180;
-
+        
+    TMOD &= 0x0F;   // Clear lower 4 bits for Timer 0
+    TMOD |= 0x10;   // Set Mode 1 (16-bit)
     // Calculate pulse width again
     pulseWidth = 500 + ((u32)angle * 2000) / 180;
 
@@ -45,14 +48,14 @@ void waitServoOffPulse(u16 angle) {
     offTime = 65536 - (((u32)(20000 - pulseWidth) * 59) >> 6);
 
     // Setup Timer 0 for OFF duration
-    TR0 = 0;
-    TH0 = offTime >> 8;
-    TL0 = offTime & 0xFF;
-    TF0 = 0;
-    TR0 = 1;
+    TR1 = 0;
+    TH1 = offTime >> 8;
+    TL1 = offTime & 0xFF;
+    TF1 = 0;
+    TR1 = 1;
 
-    while (!TF0);               // Wait until OFF time over
+    while (!TF1);               // Wait until OFF time over
 
-    TR0 = 0;
-    TF0 = 0;
+    TR1 = 0;
+    TF1 = 0;
 }
