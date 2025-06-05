@@ -52,7 +52,7 @@
   I2C_Write((u8)(DS1307));
   I2C_Write(0x00);
   I2C_Write(HEX2BCD(seconds) & 0x3F);
-  I2C_Write(HEX2BCD(seconds));
+  I2C_Write(HEX2BCD(minutes));
   I2C_Write(HEX2BCD(hours));
 	I2C_Write(HEX2BCD(dayOfWeek));
 	I2C_Write(HEX2BCD(date));

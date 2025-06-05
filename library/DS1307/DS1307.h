@@ -13,7 +13,7 @@
 
 #define IS_LEAP_YEAR(y) (((y) % 4 == 0 && (y) % 100 != 0) || (y) % 400 == 0)
 
-//extern u8 seconds, minutes, hours, date, month, year, dayOfWeek;
+extern u8 seconds, minutes, hours, date, month, year, dayOfWeek;
 
  void RTC_Init(void);
  u8 RTC_Read(void);
